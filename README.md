@@ -1,4 +1,3 @@
-﻿
 ```markdown
 # IPFS Metadata Scraper Service
 

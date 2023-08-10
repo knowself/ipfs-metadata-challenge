@@ -3,7 +3,7 @@
 
 This repository contains the code for a Golang-based microservice that fulfills the requirements of a coding challenge. The service is designed to scrape metadata from a provided list of IPFS URIs and store the data in an AWS database service, such as DynamoDB. Additionally, it exposes two RESTful API endpoints to retrieve the scraped data.
 
-## Project Structure
+## This is a proposed Project Structure
 
 The project is organized into the following structure:
 

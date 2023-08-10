@@ -1,9 +1,11 @@
 # syntax=docker/dockerfile:1
 
-# Use the official Golang image as the base image
-FROM golang:1.19
+##
+## Build the application from source
+##
 
-# Set the working directory inside the container
+FROM golang:1.19 AS build-stage
+
 WORKDIR /app
 
 # Copy the go module files first to leverage Docker cache
@@ -19,10 +21,18 @@ COPY src/ ./src
 COPY data/ ./data
 
 # Build the Go app, specifying the path to the main.go file
-RUN go build -o main ./src/main.go
+RUN go build -o /ipfs-metadata-scraper
+
+##
+## Deploy the application binary into a lean image
+##
+
+WORKDIR /app
+
+COPY --from=build-stage /ipfs-metadata-scraper /ipfs-metadata-scraper
 
 # Expose port 8080 to communicate with the application
 EXPOSE 8080
 
 # Command to run the application when the docker container starts
-CMD ["./main"]
+ENTRYPOINT ["/ipfs-metadata-scraper"]
